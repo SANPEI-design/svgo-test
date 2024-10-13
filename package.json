@@ -1,0 +1,32 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "imagemin": "node imagemin.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "imagemin-cli": "^8.0.0",
+    "imagemin-keep-folder": "^5.3.2",
+    "imagemin-svgo": "^11.0.1",
+    "jsdom": "^25.0.1",
+    "npm": "^10.9.0",
+    "npm-force-resolutions": "^0.0.10"
+  },
+  "resolutions": {
+    "braces": "3.0.3",
+    "decompress": "4.2.1",
+    "got": "14.4.3",
+    "js-yaml": "4.1.0",
+    "lodash.template": "4.5.0",
+    "semver": "7.6.3",
+    "semver-regex": "4.0.5",
+    "trim-newlines": "5.0.0",
+    "tunnel-agent": "0.6.0",
+    "url-regex": "5.0.0"
+  }
+}
