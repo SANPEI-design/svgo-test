@@ -11,10 +11,15 @@ const fs = require('fs');
   await keepfolder(['src/**/*.svg'], {
     plugins: [
       imageminSvgo({
+        // コード整形用プラグイン
+        // js2svg: {
+        //   indent: 2,
+        //   pretty: true,
+        //   closeSelfClosingTag: true, // 自己閉じタグを保持する
+        // },
         plugins: [
           'removeDimensions', // 幅と高さを削除し、viewBox のみで制御
           'removeXMLProcInst', // XML宣言を削除
-          'cleanupAttrs', // 属性の値を最適化
           'removeComments', // コメントを削除
           'removeMetadata', // <metadata> タグを削除
           'removeUselessDefs', // <defs> タグ内で使われていないものを削除
@@ -90,7 +95,7 @@ const fs = require('fs');
     const dom = new JSDOM(svgContent, { contentType: 'application/xml' });
     const document = dom.window.document;
 
-    // IDに一意のプレフィックスを追加
+    // ID名に一意のプレフィックスを追加
     const elementsWithId = document.querySelectorAll('[id]');
     elementsWithId.forEach((element) => {
       const id = element.getAttribute('id');
@@ -108,6 +113,17 @@ const fs = require('fs');
             ref.setAttribute(attrName, `url(#${newId})`);
           }
         });
+      }
+    });
+
+    // class名に一意のプレフィックスを追加
+    const elementsWithClass = document.querySelectorAll('[class]');
+    elementsWithClass.forEach((element) => {
+      const classNames = element.getAttribute('class');
+      if (classNames) {
+        const prefix = crypto.createHash('md5').update(file).digest('hex').slice(0, 8);
+        const newClassNames = classNames.split(' ').map(className => `${prefix}-${className}`).join(' ');
+        element.setAttribute('class', newClassNames);
       }
     });
 
