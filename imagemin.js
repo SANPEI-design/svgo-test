@@ -14,10 +14,9 @@ const fs = require('fs');
         plugins: [
           'removeDimensions', // 幅と高さを削除し、viewBox のみで制御
           'removeXMLProcInst', // XML宣言を削除
-          'cleanupAttrs', // 属性を最適化
+          'cleanupAttrs', // 属性の値を最適化
           'removeComments', // コメントを削除
           'removeMetadata', // <metadata> タグを削除
-          'removeDesc', // <desc> タグを削除
           'removeUselessDefs', // <defs> タグ内で使われていないものを削除
           'collapseGroups', // グループ要素を一つにまとめる
           'convertStyleToAttrs', // インラインのスタイルを対応するSVG属性に変換
